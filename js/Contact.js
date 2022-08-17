@@ -3,16 +3,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const textError = document.querySelector('.text-error');
     name.addEventListener('input', function () {
         if (name.value.length == 0) {
-            textError.textContent = "";
-            return;
-        }
+            
+
+    
         try {
             (new AddressBookData()).fullname = name.value;;
             textError.textContent = "";
         } catch (e) {
             textError.textContent = e;
         }
+    }
     });
+
 
     const phone = document.querySelector('#phone');
     const phoneError = document.querySelector('.phone-error');
@@ -64,6 +66,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 const save = () => {
     try{
         let addressBookData = createAddressBook();
+        createAndUpdateStorage(addressBookData);
     }catch (e) {
         return;
     }
@@ -87,7 +90,20 @@ const createAddressBook = () => {
     return addressBookData;
 }
 
+// UC-8
+function createAndUpdateStorage(addressBookData){
+    let addressBookList = JSON.parse(localStorage.getItem("AddressBookList"));
+    if(addressBookList != undefined){
+        addressBookList.push(addressBookData);
+    }
+    else{
+        addressBookList = [addressBookData];
+    }
+    alert(addressBookList.toString());
+    localStorage.setItem("AddressBookList", JSON.stringify(addressBookList));
+}
+
 const getInputValuesById = (id) => {
     let value = document.querySelector(id).value;
     return value;
-}
+}    
