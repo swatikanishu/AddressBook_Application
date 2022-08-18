@@ -56,11 +56,3 @@ class AddressBookData{
                         ", city = "+this.city+ ", state = " + this.state +", zip-code = " + this.zip; 
     }
 }
-const resetForm = () => {
-    setValue('#name','');
-    setValue('#phone','');
-    setValue('#address','');
-    setValue('#city','');
-    setValue('#state','');
-    setValue('#zip','');
-}
